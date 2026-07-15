@@ -1,0 +1,601 @@
+/* ==========================================================================
+   CSS VARIABLES & CORE THEMES[cite: 1]
+   ========================================================================== */
+:root {
+    /* Fonts */
+    --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+
+    /* Transition speeds */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}
+
+.light-theme {
+    --bg-overlay: rgba(255, 255, 255, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-hover-bg: #ffffff;
+    --text-main: #2b2d42;
+    --text-muted: #6c757d;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --primary-color: #4361ee;
+    --primary-hover: #3f37c9;
+    --danger-color: #ef233c;
+    --success-color: #2b9348;
+    --warning-color: #ffb703;
+    --input-bg: #f8f9fa;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+}
+
+.dark-theme {
+    --bg-overlay: rgba(18, 18, 18, 0.8);
+    --card-bg: rgba(30, 30, 30, 0.9);
+    --card-hover-bg: #252525;
+    --text-main: #f8f9fa;
+    --text-muted: #adb5bd;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --primary-color: #4cc9f0;
+    --primary-hover: #4361ee;
+    --danger-color: #f77f00;
+    --success-color: #55a630;
+    --warning-color: #ffb703;
+    --input-bg: #121212;
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* ==========================================================================
+   BASE & RESET STYLES
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Dynamic Background Implementations[cite: 1] */
+.dashboard-bg-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: background 1s ease-in-out;
+}
+
+.morning-bg {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+.afternoon-bg {
+    background: linear-gradient(135deg, #fce38a 0%, #f38181 100%);
+}
+.evening-bg {
+    background: linear-gradient(135deg, #4568dc 0%, #b06ab3 100%);
+}
+.night-bg {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+}
+
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg-overlay);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: background var(--transition-normal);
+}
+
+/* ==========================================================================
+   HEADER COMPONENTS
+   ========================================================================== */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.date-time-widget h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.date-time-widget p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 0.2rem;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.weather-widget {
+    background: var(--card-bg);
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.weather-temp {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.weather-cond {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.weather-icon {
+    font-size: 1.8rem;
+    color: var(--warning-color);
+}
+
+.theme-toggle-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+    background: var(--card-hover-bg);
+}
+
+/* ==========================================================================
+   DASHBOARD HOME GRID[cite: 1]
+   ========================================================================== */
+.content-area {
+    flex-grow: 1;
+    position: relative;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+    background: var(--card-hover-bg);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   FEATURE VIEWS COMPONENT UTILITIES
+   ========================================================================== */
+.feature-view {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    min-height: 60vh;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.view-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.back-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background var(--transition-fast);
+}
+
+.back-btn:hover {
+    background: var(--input-bg);
+}
+
+.max-width-md {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.centered-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 45vh;
+}
+
+/* ==========================================================================
+   FORMS & LAYOUT ELEMENTS
+   ========================================================================== */
+.input-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group input[type="text"] {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-color);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    white-space: nowrap;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+/* ==========================================================================
+   TODO & GOALS LIST LAYOUTS
+   ========================================================================== */
+.item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.list-item {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: opacity var(--transition-fast);
+}
+
+.item-text {
+    font-size: 1rem;
+}
+
+.item-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.25rem;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+}
+
+.action-btn.flag:hover, .list-item.important .action-btn.flag { color: var(--warning-color); }
+.action-btn.complete:hover { color: var(--success-color); }
+.action-btn.delete:hover { color: var(--danger-color); }
+
+.list-item.completed .item-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+/* Custom Checkbox styles for Goals view */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    border-color: var(--primary-color);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checked-item {
+    opacity: 0.7;
+    text-decoration: line-through;
+}
+
+/* Progress bar[cite: 1] */
+.progress-container {
+    margin-bottom: 1.5rem;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.progress-bar-outer {
+    width: 100%;
+    height: 8px;
+    background: var(--input-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    background: var(--success-color);
+    transition: width var(--transition-normal);
+}
+
+/* ==========================================================================
+   DAILY PLANNER LAYOUT[cite: 1]
+   ========================================================================== */
+.planner-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.time-slot-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 0;
+}
+
+.time-label {
+    width: 90px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.time-slot-row input {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    border-radius: 4px;
+}
+
+.time-slot-row input:focus {
+    background: var(--input-bg);
+}
+
+.current-hour {
+    background: rgba(67, 97, 238, 0.1);
+    border-radius: 8px;
+    padding-left: 0.5rem;
+}
+
+.current-hour .time-label {
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   POMODORO TIMER WIDGET LAYOUT[cite: 1]
+   ========================================================================== */
+.timer-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.timer-status {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.timer-display {
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 1.5rem 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-control {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.btn-control.start { background: var(--success-color); color: #fff; }
+.btn-control.pause { background: var(--warning-color); color: #fff; }
+.btn-control.reset { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); }
+
+/* ==========================================================================
+   MOTIVATIONAL QUOTE CONTAINER[cite: 1]
+   ========================================================================== */
+.quote-card {
+    text-align: center;
+    max-width: 550px;
+    padding: 1rem;
+}
+
+.quote-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.quote-author {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.quote-loading {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   ANIMATIONS & RESPONSIVENESS
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .app-container {
+        padding: 1rem;
+    }
+}

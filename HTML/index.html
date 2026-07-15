@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Dashboard</title>
+    <link rel="stylesheet" href="../CSS/stylee.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-theme"> <!-- Toggle class to "dark-theme" for dark mode -->
+
+    <!-- BACKGROUND WRAPPER FOR DYNAMIC BACKGROUNDS -->
+    <div class="dashboard-bg-wrapper morning-bg"></div>
+
+    <div class="app-container">
+        
+        <!-- HEADER WIDGETS (Always Visible) -->
+        <header class="main-header">
+            <div class="header-left">
+                <div class="date-time-widget">
+                    <h1 id="live-time">10:42 AM</h1>
+                    <p id="live-date">Wednesday, July 15, 2026</p>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <!-- Weather Widget -->
+                <div class="weather-widget">
+                    <div class="weather-info">
+                        <span class="weather-temp">28°C</span>
+                        <span class="weather-cond">Partly Cloudy</span>
+                    </div>
+                    <i class="fa-solid fa-cloud-sun weather-icon"></i>
+                </div>
+                
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="content-area">
+            
+            <!-- ========================================== -->
+            <!-- 1. MAIN DASHBOARD HOME VIEW                -->
+            <!-- ========================================== -->
+            <section id="dashboard-home" class="dashboard-grid">
+                
+                <!-- Todo Card -->
+                <div class="feature-card" data-target="todo-view">
+                    <div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <h3>Todo List</h3>
+                    <p>Manage tasks & check off priorities.</p>
+                </div>
+
+                <!-- Planner Card -->
+                <div class="feature-card" data-target="planner-view">
+                    <div class="card-icon"><i class="fa-solid fa-calendar-day"></i></div>
+                    <h3>Daily Planner</h3>
+                    <p>Organize your hours systematically.</p>
+                </div>
+
+                <!-- Goals Card -->
+                <div class="feature-card" data-target="goals-view">
+                    <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3>Daily Goals</h3>
+                    <p>Track metrics and habits today.</p>
+                </div>
+
+                <!-- Pomodoro Card -->
+                <div class="feature-card" data-target="pomodoro-view">
+                    <div class="card-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                    <h3>Pomodoro Timer</h3>
+                    <p>Set a focus period and take breaks.</p>
+                </div>
+
+                <!-- Motivation Card -->
+                <div class="feature-card" data-target="motivation-view">
+                    <div class="card-icon"><i class="fa-solid fa-quote-left"></i></div>
+                    <h3>Inspiration</h3>
+                    <p>Get a fresh, motivational spark.</p>
+                </div>
+
+            </section>
+
+            <!-- ========================================== -->
+            <!-- 2. TODO LIST FEATURE VIEW (Hidden by default)-->
+            <!-- ========================================== -->
+            <section id="todo-view" class="feature-view hidden">
+                <div class="view-header">
+                    <button class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2><i class="fa-solid fa-list-check"></i> Todo List</h2>
+                </div>
+                <div class="view-body max-width-md">
+                    <form class="input-group" onsubmit="return false;">
+                        <input type="text" placeholder="Add a new task..." required>
+                        <button type="submit" class="btn-primary">Add Task</button>
+                    </form>
+                    <ul class="item-list">
+                        <li class="list-item important">
+                            <span class="item-text">Finish project structure documentation</span>
+                            <div class="item-actions">
+                                <button class="action-btn flag" title="Important"><i class="fa-solid fa-star"></i></button>
+                                <button class="action-btn complete" title="Complete"><i class="fa-solid fa-check"></i></button>
+                                <button class="action-btn delete" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </li>
+                        <li class="list-item completed">
+                            <span class="item-text">Review team UI components</span>
+                            <div class="item-actions">
+                                <button class="action-btn flag" title="Important"><i class="fa-regular fa-star"></i></button>
+                                <button class="action-btn complete" title="Complete"><i class="fa-solid fa-rotate-left"></i></button>
+                                <button class="action-btn delete" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- 3. DAILY PLANNER FEATURE VIEW (Hidden)     -->
+            <!-- ========================================== -->
+            <section id="planner-view" class="feature-view hidden">
+                <div class="view-header">
+                    <button class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2><i class="fa-solid fa-calendar-day"></i> Daily Planner</h2>
+                </div>
+                <div class="view-body max-width-md">
+                    <div class="planner-grid">
+                        <div class="time-slot-row">
+                            <span class="time-label">09:00 AM</span>
+                            <input type="text" placeholder="Empty slot - click to add plan...">
+                        </div>
+                        <div class="time-slot-row current-hour">
+                            <span class="time-label">10:00 AM</span>
+                            <input type="text" value="Standup Meeting & Design review" placeholder="Empty slot...">
+                        </div>
+                        <div class="time-slot-row">
+                            <span class="time-label">11:00 AM</span>
+                            <input type="text" placeholder="Empty slot - click to add plan...">
+                        </div>
+                        <div class="time-slot-row">
+                            <span class="time-label">12:00 PM</span>
+                            <input type="text" placeholder="Empty slot - click to add plan...">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- 4. DAILY GOALS FEATURE VIEW (Hidden)       -->
+            <!-- ========================================== -->
+            <section id="goals-view" class="feature-view hidden">
+                <div class="view-header">
+                    <button class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2><i class="fa-solid fa-bullseye"></i> Daily Goals</h2>
+                </div>
+                <div class="view-body max-width-md">
+                    <div class="progress-container">
+                        <div class="progress-text">Progress: <span>1 of 3 completed</span></div>
+                        <div class="progress-bar-outer">
+                            <div class="progress-bar-inner" style="width: 33.3%;"></div>
+                        </div>
+                    </div>
+                    <form class="input-group" onsubmit="return false;">
+                        <input type="text" placeholder="Enter a goal for today...">
+                        <button type="submit" class="btn-primary">Add Goal</button>
+                    </form>
+                    <ul class="item-list">
+                        <li class="list-item">
+                            <label class="checkbox-container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                Drink 3L of water
+                            </label>
+                            <button class="action-btn delete"><i class="fa-solid fa-xmark"></i></button>
+                        </li>
+                        <li class="list-item checked-item">
+                            <label class="checkbox-container">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                Read for 20 minutes
+                            </label>
+                            <button class="action-btn delete"><i class="fa-solid fa-xmark"></i></button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- 5. POMODORO TIMER FEATURE VIEW (Hidden)    -->
+            <!-- ========================================== -->
+            <section id="pomodoro-view" class="feature-view hidden">
+                <div class="view-header">
+                    <button class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2><i class="fa-solid fa-stopwatch"></i> Pomodoro Timer</h2>
+                </div>
+                <div class="view-body centered-flex">
+                    <div class="timer-card">
+                        <span class="timer-status">Work Session</span>
+                        <div class="timer-display">25:00</div>
+                        <div class="timer-controls">
+                            <button class="btn-control start"><i class="fa-solid fa-play"></i> Start</button>
+                            <button class="btn-control pause hidden"><i class="fa-solid fa-pause"></i> Pause</button>
+                            <button class="btn-control reset"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- 6. MOTIVATION QUOTE FEATURE VIEW (Hidden)  -->
+            <!-- ========================================== -->
+            <section id="motivation-view" class="feature-view hidden">
+                <div class="view-header">
+                    <button class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2><i class="fa-solid fa-quote-left"></i> Motivation</h2>
+                </div>
+                <div class="view-body centered-flex">
+                    <div class="quote-card">
+                        <!-- Loading element to show toggle state safely -->
+                        <div class="quote-loading hidden"><i class="fa-solid fa-spinner fa-spin"></i> Fetching quote...</div>
+                        
+                        <blockquote class="quote-text">
+                            "The best way to predict the future is to invent it."
+                        </blockquote>
+                        <cite class="quote-author">— Alan Kay</cite>
+                        <button class="btn-primary fetch-quote-btn"><i class="fa-solid fa-shuffle"></i> New Quote</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script type="module" src="../JS/app.js"></script>
+</body>
+</html>
